@@ -139,7 +139,7 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
         cursor.execute(
             "SELECT engine "
             "FROM information_schema.tables "
-            "WHERE table_name = %s", [table_name])
+            "WHERE table_name = %s and table_schema = DATABASE()", [table_name])
         result = cursor.fetchone()
         if not result:
             return self.connection.features._mysql_storage_engine
